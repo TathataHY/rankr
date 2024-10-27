@@ -1,0 +1,18 @@
+services:
+  redis:
+    image: 'redislabs/rejson:2.0.0'
+    ports:
+      - '6379:6379'
+    volumes:
+      - 'redisdata:/data'
+    command: redis-server --appendonly yes
+    restart: always
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+volumes:
+  redisdata:
+
+
